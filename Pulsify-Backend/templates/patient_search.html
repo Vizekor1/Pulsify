@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Patient Search</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Search Patient by DOB and Last Name</h2>
+    <form action="/patient_search" method="POST">
+      <div class="form-group">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" class="form-control" name="dob" id="dob" required />
+      </div>
+      <div class="form-group">
+        <label for="last_name">Last Name:</label>
+        <input type="text" class="form-control" name="last_name" id="last_name" required />
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if patients and patients|length > 0 %}
+      <form action="{{ url_for('patient_profile') }}" method="GET" class="mt-4">
+        <div class="form-group">
+          <label for="patient_id">Select Patient:</label>
+          <select name="patient_id" id="patient_id" class="form-control" required>
+            {% for patient in patients %}
+              <option value="{{ patient.id }}">
+                {{ patient.first_name }} {{ patient.last_name }} (DOB: {{ patient.dob }})
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-info">View Patient Profile</button>
+      </form>
+    {% elif patients is not none %}
+      <p class="mt-4 text-danger">No patients found.</p>
+    {% endif %}
+  </div>
+</body>
+</html>

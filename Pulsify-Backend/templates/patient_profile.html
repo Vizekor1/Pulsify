@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Profile - PulsePoint</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Optional custom CSS -->
+  <style>
+    .chat-box {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      min-height: 120px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <!-- Patient Information -->
+    <div class="card mb-4">
+      <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Patient Profile</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Name:</strong> {{ patient.first_name }} {{ patient.last_name }}</p>
+        <p><strong>Date of Birth:</strong> {{ patient.dob }}</p>
+        <!-- You can add more patient info here -->
+      </div>
+    </div>
+
+<!-- AI Chat Assistant Section -->
+<div class="card">
+  <div class="card-header bg-info text-white">
+    <h5 class="mb-0">Ask AI Medical Assistant</h5>
+  </div>
+  <div class="card-body">
+    <form id="chat-form">
+      <div class="form-group">
+        <label for="message">Ask about the patient's symptoms, history, or care:</label>
+        <textarea id="message" class="form-control" rows="3" placeholder="e.g. What could be the cause of frequent headaches?" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div class="mt-4 chat-box" id="chat-response">AI response will appear here...</div>
+  </div>
+</div>
+</div>
