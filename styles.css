@@ -1,37 +1,78 @@
-/* General Styles */
+/* Global Styles */
 body {
-    background-color: #f8f9fa;
-  }
-  
-  /* Header Styles */
-  header {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Card Styles */
-  .card {
-    border: none;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  }
-  
-  .card-header {
-    font-size: 1.25rem;
-    font-weight: bold;
-  }
-  
-  /* Alerts List */
-  #alerts-list {
-    max-height: 200px;
-    overflow-y: auto;
-  }
-  
-  /* Container for Sign-Up or Other Pages */
-  .container {
-    max-width: 500px;
-  }
-  
-  /* Headings */
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
+  background-color: #1B0033; /* Dark purple background */
+  color: white;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header Styles */
+.header,
+header {
+  background-color: #2A0A45; /* Dark purple header */
+  padding: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  color: white;
+  margin: 0;
+}
+
+/* Sign-Up Section */
+#signup-section {
+  margin: 40px 0;
+  text-align: center;
+}
+
+/* Carousel Section */
+#carousel-section h2 {
+  color: white;
+}
+
+/* Features Section */
+.features-section {
+  background-color: #2C003E; /* Dark purple for features section */
+  padding: 50px 0;
+}
+
+.features-headline {
+  color: #00BFFF; /* Sky blue headline */
+}
+
+.feature-item {
+  margin-bottom: 30px;
+}
+
+.feature-item h4,
+.feature-item p {
+  color: white;
+}
+
+/* Footer */
+.footer {
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 15px 0;
+  font-size: 0.9rem;
+  margin-top: 40px;
+  text-align: center;
+}
+
+/* Button Hover Effect for Sign-Up Button */
+.btn-secondary:hover {
+  background-color: #00BFFF;
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Carousel Images */
+.carousel-item img {
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.signup-header {
+  color: white;
+}
