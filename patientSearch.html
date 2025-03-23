@@ -8,21 +8,28 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css">
+  <style>
+    #patient-search-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
   <!-- Header -->
-  <header class="header">
+  <header class="header bg-purple text-white p-3">
     <div class="container text-center">
       <h1>Patient Search</h1>
     </div>
   </header>
 
   <!-- Main Content -->
-  <main class="container my-4" style="max-width: 600px;">
+  <main class="container my-4">
     <form id="patient-search-form">
       <div class="form-group">
-        <label for="lastName">Last Name:</label>
-        <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" required>
+        <label for="name">Patient Name (First & Last):</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter patient name" required>
+      </div>
       <div class="form-group">
         <label for="dob">Date of Birth (MM/DD/YYYY):</label>
         <input type="text" class="form-control" id="dob" placeholder="MM/DD/YYYY" required>
@@ -41,22 +48,14 @@
   <!-- Bootstrap JS and dependencies -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Optional: Custom JS for patient search functionality -->
   <script>
-    // Example of a simple event listener for the search form.
-    // In a real application, you’d validate login and then process the search query.
     document.getElementById('patient-search-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      const lastName = document.getElementById('lastName').value.trim();
-      const firstName = document.getElementById('firstName').value.trim();
+      const name = document.getElementById('name').value.trim();
       const dob = document.getElementById('dob').value.trim();
       
-      // You can add validation for the DOB format here if needed.
-      // For now, we'll just log the inputs.
-      console.log('Searching for patient:', { firstName, lastName, dob });
-      
-      // Optionally display a message or perform an AJAX request to search a backend.
-      alert(`Searching for ${firstName} ${lastName}, DOB: ${dob}`);
+      console.log('Searching for patient:', { name, dob });
+      alert(`Searching for ${name} with DOB: ${dob}`);
     });
   </script>
 </body>
