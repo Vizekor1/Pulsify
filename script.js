@@ -31,4 +31,4 @@ function simulateData() {
   
   // Simulate data every 5 seconds
   setInterval(simulateData, 5000);
-  simulateData(); // In itial call to populate data immediately
+  simulateData(); // Initial call to populate data immediately
