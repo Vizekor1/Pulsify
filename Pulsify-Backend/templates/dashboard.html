@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dashboard</title>
+  <meta charset="UTF-8">
+  <title>Dashboard - PulsePoint</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-  <h1>Welcome to the Dashboard!</h1>
-  <h2>Registered Users:</h2>
-  <ul>
-    {% for user in users %}
-      <li>{{ user.username }}</li>
-    {% endfor %}
-  </ul>
+  <div class="container mt-5">
+    <h2>Welcome to the Dashboard</h2>
+    <p>You are logged in as: {{ session['username'] }}</p>
+    <a href="/patient_search" class="btn btn-info">Search for Patients</a>
+    <a href="/logout" class="btn btn-danger ml-2">Logout</a>
+  </div>
 </body>
-</html> #gfgf
+</html>

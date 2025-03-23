@@ -1,4 +1,4 @@
-#!/Users/samuelbajulaiye/PulsePoint-Backend/venv/bin/python3.12
+#!/Users/samuelbajulaiye/Pulsify/Pulsify/Pulsify-Backend/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
