@@ -22,6 +22,8 @@ def signup():
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard.html', users=users)
-
+@app.rout('/login')
+def login();
+    
 if __name__ == '__main__':
     app.run(debug=True)
