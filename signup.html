@@ -6,14 +6,14 @@
   <title>Sign Up - Pulsify</title>
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- Custom CSS (if you have one) -->
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <!-- Header -->
-  <header class="bg-primary p-3">
+  <header class="bg-purple text-white p-3">
     <div class="container text-center">
-      <h1 class="signup-header" Sign Up For Pulsify</h1>
+      <h1>Sign Up for Pulsify</h1>
     </div>
   </header>
 
@@ -21,37 +21,32 @@
   <main class="container mt-5" style="max-width: 500px;">
     <h2 class="text-center mb-4">Create Your Account</h2>
     <form id="signup-form">
-      <!-- NPI Field -->
       <div class="form-group">
         <label for="npi">NPI:</label>
         <input type="text" class="form-control" id="npi" name="npi" placeholder="Enter NPI" required>
       </div>
-      <!-- First Name Field -->
       <div class="form-group">
         <label for="firstName">First Name:</label>
         <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name" required>
       </div>
-      <!-- Last Name Field -->
       <div class="form-group">
         <label for="lastName">Last Name:</label>
         <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name" required>
       </div>
-      <!-- SSN Field -->
       <div class="form-group">
-        <label for="ssn">SSN:</label>
-        <input type="text" class="form-control" id="ssn" name="ssn" placeholder="Enter SSN" required>
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username" required>
       </div>
-      <!-- Create Password Field -->
       <div class="form-group">
-        <label for="password">Create Password:</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Create Password" required>
       </div>
       <button type="submit" class="btn btn-secondary btn-lg btn-block">Sign Up</button>
     </form>
   </main>
 
   <!-- Footer with Disclaimer -->
-  <footer class="bg-light text-center p-3 mt-5">
+  <footer class="footer bg-light text-center p-3 mt-5">
     <small>
       In order to access this page you have to be a Licensed Physician. Any other individuals will be violating HIPAA.
     </small>
@@ -64,34 +59,25 @@
   <!-- Inline Script to Handle Form Submission -->
   <script>
     document.getElementById('signup-form').addEventListener('submit', function(e) {
-      e.preventDefault(); // Prevent default form submission
-
+      e.preventDefault();
       // Retrieve field values
       const npi = document.getElementById('npi').value.trim();
       const firstName = document.getElementById('firstName').value.trim();
       const lastName = document.getElementById('lastName').value.trim();
-      const ssn = document.getElementById('ssn').value.trim();
+      const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value.trim();
 
-      // Basic validation (HTML "required" attribute already handles emptiness)
-      if (!npi || !firstName || !lastName || !ssn || !password) {
+      if (!npi || !firstName || !lastName || !username || !password) {
         alert('Please fill in all required fields.');
         return;
       }
 
-      // Store the sign-up data in localStorage (for demo purposes; not secure for production)
-      const userData = {
-        npi: npi,
-        firstName: firstName,
-        lastName: lastName,
-        ssn: ssn,
-        password: password
-      };
+      // For demo purposes, store data in localStorage (not secure)
+      const userData = { npi, firstName, lastName, username, password };
       localStorage.setItem('userData', JSON.stringify(userData));
 
-      // Show success message and redirect to homepage (or a "Thank You" page)
-      alert('Sign-up successful! You can now access the dashboard.');
-      window.location.href = 'index.html';
+      alert('Sign-up successful! You can now log in.');
+      window.location.href = 'login.html';
     });
   </script>
 </body>
