@@ -1,32 +1,76 @@
-<!-- signup.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sign Up - PulsePoint</title>
+  <title>Sign Up - Pulsify</title>
   <!-- Bootstrap CSS CDN -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- Custom Styles -->
-  <link rel="stylesheet" href="/static/styles.css">
+  <!-- Optional: Your custom CSS -->
+  <!-- <link rel="stylesheet" href="styles.css"> -->
 </head>
 <body>
-  <div class="container mt-5">
-    <h2>Healthcare Provider Sign Up</h2>
-    <form id="signup-form" action="/signup" method="POST">
+  <!-- Header -->
+  <header class="bg-primary text-white p-3">
+    <div class="container text-center">
+      <h1>Sign Up for Pulsify</h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mt-5" style="max-width: 500px;">
+    <h2 class="text-center">Create Your Account</h2>
+    <!-- 
+      Since we have NO BACKEND, we won't use action="/signup" 
+      Instead, we handle it with JS or do nothing 
+    -->
+    <form id="signup-form">
       <div class="form-group">
-        <label for="username">Email or Username:</label>
-        <input type="text" class="form-control" id="username" name="username" required>
+        <label for="username">Username or Email:</label>
+        <input type="text" class="form-control" id="username" required>
       </div>
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" name="password" required>
+        <input type="password" class="form-control" id="password" required>
       </div>
-      <button type="submit" class="btn btn-primary">Sign Up</button>
+      <button type="submit" class="btn btn-secondary btn-lg btn-block">Sign Up</button>
     </form>
-  </div>
+  </main>
 
-  <!-- Optional: Include your custom JavaScript for additional client-side validation -->
-  <script src="/static/script.js"></script>
+  <!-- Footer with Disclaimer -->
+  <footer class="bg-light text-center p-3 mt-5">
+    <small>
+      In order to access this page you have to be a Licensed Physician. Any other individuals will be violating HIPAA.
+    </small>
+  </footer>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Inline Script or external script.js for demonstration -->
+  <script>
+    // Since there's no backend, let's store user data in localStorage 
+    // and then redirect to index.html with a success message.
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault(); // Prevent page refresh
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (!username || !password) {
+        alert('Please fill in all fields.');
+        return;
+      }
+
+      // Storing in localStorage (NOT secure, just for demonstration)
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+
+      alert('Sign-up successful! You can now access the dashboard.');
+      // Redirect back to the homepage
+      window.location.href = 'index.html';
+    });
+  </script>
 </body>
 </html>
