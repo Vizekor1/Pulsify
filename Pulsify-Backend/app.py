@@ -20,7 +20,7 @@ valid_providers = [
 # In-memory registered users list (for providers)
 users = []
 
-# Simulated patient data (10 patients) – (used elsewhere)
+# Simulated patient data (10 patients)
 patients = [
     {"id": 1, "first_name": "Alice", "last_name": "Anderson", "dob": "1985-01-15"},
     {"id": 2, "first_name": "Bob", "last_name": "Brown", "dob": "1990-02-20"},
@@ -105,8 +105,35 @@ def logout():
     return redirect(url_for('signup'))
 
 # --------------------------
-# (Other routes for patient search/chart can be added below)
+# Patient Search and Chart Routes
 # --------------------------
+
+# Patient search: doctor searches by Date of Birth (DOB)
+@app.route('/patient_search', methods=['GET', 'POST'])
+def patient_search():
+    if request.method == 'POST':
+        dob = request.form.get('dob')
+        # Filter patients by DOB (exact match for simplicity)
+        matching_patients = [p for p in patients if p['dob'] == dob]
+        # Render the search page with a dropdown of matching patients
+        return render_template('patient_search.html', patients=matching_patients)
+    # On GET, no patients are displayed until a search is made
+    return render_template('patient_search.html', patients=None)
+
+# Patient chart: display detailed patient information
+@app.route('/patient_chart', methods=['GET'])
+def patient_chart():
+    patient_id = request.args.get('patient_id')
+    if not patient_id:
+        return "No patient selected", 400
+    try:
+        patient_id = int(patient_id)
+    except ValueError:
+        return "Invalid patient id", 400
+    patient = next((p for p in patients if p['id'] == patient_id), None)
+    if not patient:
+        return "Patient not found", 404
+    return render_template('patient_chart.html', patient=patient)
 
 if __name__ == '__main__':
     app.run(debug=True)
