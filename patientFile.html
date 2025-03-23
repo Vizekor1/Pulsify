@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient File - Pulsify</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Inline styles for additional tweaks on this page */
+    .bg-purple {
+      background-color: #2C003E;
+      color: #fff;
+    }
+    .ourple {
+      background-color: #3B0A70;
+      color: #fff;
+    }
+    .patient-details, .patient-details p, .patient-details h5 {
+      color: black !important;
+    }
+    /* Spacing for new sections */
+    .section-header {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #2C003E;
+      font-weight: bold;
+    }
+    .notes-section textarea {
+      width: 100%;
+      height: 150px;
+      resize: vertical;
+      padding: 0.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid #ccc;
+    }
+    /* AI Chat adjustments */
+    .ai-chat-input {
+      margin-top: 1rem;
+    }
+    .ai-chat-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .ai-chat-buttons button {
+      border: none;
+      border-radius: 0.25rem;
+      background-color: #fff;
+      color: #2C003E;
+      padding: 0.5rem 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .ai-chat-buttons button:hover {
+      background-color: #f1f1f1;
+    }
+    /* Fixed Alert Button at bottom left */
+    #alertButton {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar (Dark Purple) -->
+      <nav class="col-md-2 d-none d-md-block bg-purple sidebar py-4">
+        <div class="text-center mb-4">
+          <img
+            src="images/doctor.jpg"
+            alt="Doctor Avatar"
+            class="rounded-circle mb-2"
+            style="width: 80px; height: 80px; object-fit: cover;"
+          />
+          <h5>Dr. Victor Izekor</h5>
+          <small>MD, Orthopedic</small>
+        </div>
+        <ul class="nav flex-column pl-3">
+          <li class="nav-item mb-2">
+            <a class="nav-link" href="#">Dashboard</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a class="nav-link" href="#">Patient</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a class="nav-link" href="#">Schedule</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a class="nav-link" href="#">Settings</a>
+          </li>
+        </ul>
+
+        <!-- AI Chat Section at Bottom -->
+        <div class="ai-chat mt-4 p-3">
+          <h6 class="mb-3 text-center">Pulsify AI</h6>
+          <div class="ai-chat-messages" id="aiChatMessages">
+            <div><strong>Pulsify AI:</strong> Hello, how can I help you today?</div>
+          </div>
+          <!-- Input Area Underneath the Chat Messages -->
+          <div class="ai-chat-input">
+            <input type="text" id="aiChatInput" placeholder="Ask about medications, side effects..." />
+            <div class="ai-chat-buttons">
+              <button id="aiVoiceBtn" title="Voice Input">
+                <img src="images/mic.jpg" alt="Mic" style="height:20px; width:20px;">
+              </button>
+              <button id="aiChatSend">Ask</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main Content -->
+      <main class="col-md-10 ml-sm-auto px-4 py-4">
+        <!-- Breadcrumb / Header (Ourple) -->
+        <div class="ourple text-white p-3 mb-3 rounded">
+          <h6 class="mb-0">
+            Patient Search &gt; Patient Details &gt;
+            <span class="font-weight-bold">Samuel Bajulaiye</span>
+          </h6>
+        </div>
+
+        <!-- Patient Info Card -->
+        <div class="card mb-4">
+          <div class="card-header ourple text-white">
+            <strong>Patient Information</strong>
+          </div>
+          <div class="card-body d-flex flex-row align-items-center">
+            <img
+              src="https://via.placeholder.com/100"
+              alt="Patient Avatar"
+              class="rounded-circle mr-4"
+              style="width: 100px; height: 100px; object-fit: cover;"
+            />
+            <div>
+              <h5 class="card-title mb-1 patient-details">Samuel Bajulaiye</h5>
+              <p class="mb-1 patient-details">sammybajus@gmail.com</p>
+              <p class="mb-0 patient-details">#0385</p>
+            </div>
+            <div class="ml-auto text-right patient-details">
+              <p class="mb-1"><strong>Gender:</strong> Male</p>
+              <p class="mb-1"><strong>Age:</strong> 21</p>
+              <p class="mb-1"><strong>DOB:</strong> 01/01/2001</p>
+              <p class="mb-1"><strong>Height:</strong> 6'3"</p>
+              <p class="mb-1"><strong>Weight:</strong> 250 lbs</p>
+              <p class="mb-1"><strong>Department:</strong> Cardiology</p>
+              <p class="mb-0"><strong>Joined Date:</strong> March 23rd, 2023</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Patient Current Vitals -->
+        <h5 class="mb-3">Patient Current Vitals</h5>
+        <div class="row patient-vitals">
+          <!-- Blood Pressure (Stable - Green) -->
+          <div class="col-md-2 mb-3">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <p class="mb-1 text-muted">Blood Pressure</p>
+                <h4 class="card-title text-dark">120/89</h4>
+                <small class="badge badge-success">Stable</small>
+              </div>
+            </div>
+          </div>
+          <!-- Heart Rate (Questionable - Yellow) -->
+          <div class="col-md-2 mb-3">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <p class="mb-1 text-muted">Heart Rate</p>
+                <h4 class="card-title text-dark">120</h4>
+                <small class="badge badge-warning">Questionable</small>
+              </div>
+            </div>
+          </div>
+          <!-- Glucose (Stable - Green) -->
+          <div class="col-md-2 mb-3">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <p class="mb-1 text-muted">Glucose</p>
+                <h4 class="card-title text-dark">95</h4>
+                <small class="badge badge-success">Stable</small>
+              </div>
+            </div>
+          </div>
+          <!-- Oxygen Saturation (Stable - Green) -->
+          <div class="col-md-2 mb-3">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <p class="mb-1 text-muted">O2 Saturation</p>
+                <h4 class="card-title text-dark">98%</h4>
+                <small class="badge badge-success">Stable</small>
+              </div>
+            </div>
+          </div>
+          <!-- Body Temperature (Questionable - Yellow) -->
+          <div class="col-md-2 mb-3">
+            <div class="card text-center h-100">
+              <div class="card-body">
+                <p class="mb-1 text-muted">Body Temp</p>
+                <h4 class="card-title text-dark">99.1</h4>
+                <small class="badge badge-warning">Questionable</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Patient History -->
+        <h5 class="mt-4 mb-3">Patient History</h5>
+        <div class="card mb-4">
+          <div class="card-body">
+            <table class="table table-bordered table-hover mb-0">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Medication</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Lisinopril</td>
+                  <td>Jan 21, 2023 - 09:00 AM</td>
+                  <td><span class="badge badge-success">Stable</span></td>
+                </tr>
+                <tr>
+                  <td>Atorvastatin</td>
+                  <td>Jan 22, 2023 - 10:30 AM</td>
+                  <td><span class="badge badge-warning">Borderline</span></td>
+                </tr>
+                <tr>
+                  <td>Hydrochlorothiazide</td>
+                  <td>Jan 25, 2023 - 01:00 PM</td>
+                  <td><span class="badge badge-danger">Critical</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Drug Interactions & Allergies Section -->
+        <h5 class="section-header">Drug Interactions & Allergies</h5>
+        <div class="card mb-4">
+          <div class="card-body" style="color: black;">
+            <p>
+              Based on the current medications for high blood pressure and high cholesterol,
+              the following drugs may interact adversely and should be avoided:
+            </p>
+            <ul>
+              <li>Aspirin (if on certain blood pressure medications)</li>
+              <li>NSAIDs (can increase blood pressure)</li>
+              <li>Grapefruit juice (can interfere with statins)</li>
+              <li>Certain antibiotics (may interact with blood pressure medications)</li>
+            </ul>
+            <p>Please verify patient allergies before prescribing.</p>
+          </div>
+        </div>
+
+        <!-- Doctor's Notes Section -->
+        <h5 class="section-header">Doctor's Notes</h5>
+        <div class="card mb-4">
+          <div class="card-body notes-section">
+            <textarea placeholder="Enter notes for future reference..."></textarea>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Fixed Alert Button (Bottom Left) -->
+  <button id="alertButton" class="btn btn-danger">Alert First Responders</button>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- AI Chat Voice Activation and Message Handling -->
+  <script>
+    // Elements for AI chat
+    const aiChatSend = document.getElementById('aiChatSend');
+    const aiChatInput = document.getElementById('aiChatInput');
+    const aiChatMessages = document.getElementById('aiChatMessages');
+    const aiVoiceBtn = document.getElementById('aiVoiceBtn');
+
+    // Check for Speech Recognition support
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition;
+    if (SpeechRecognition) {
+      recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+      
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        aiChatInput.value = transcript;
+      };
+      
+      recognition.onerror = (event) => {
+        console.error('Speech Recognition Error:', event.error);
+        alert('Error with speech recognition: ' + event.error);
+      };
+    } else {
+      console.warn('Speech Recognition not supported in this browser.');
+    }
+
+    // Start speech recognition on mic button click
+    aiVoiceBtn.addEventListener('click', () => {
+      if (recognition) {
+        recognition.start();
+      } else {
+        alert('Speech Recognition not supported in this browser.');
+      }
+    });
+
+    // Handle AI Chat Send button
+    aiChatSend.addEventListener('click', () => {
+      const userMessage = aiChatInput.value.trim();
+      if (userMessage) {
+        const userMsgDiv = document.createElement('div');
+        userMsgDiv.innerHTML = '<strong>You:</strong> ' + userMessage;
+        aiChatMessages.appendChild(userMsgDiv);
+
+        // Simulate an AI response (placeholder)
+        const aiResponse = 'This is an AI-generated response regarding "' + userMessage + '"';
+        const aiMsgDiv = document.createElement('div');
+        aiMsgDiv.innerHTML = '<strong>Pulsify AI:</strong> ' + aiResponse;
+        aiChatMessages.appendChild(aiMsgDiv);
+
+        // Clear the input field
+        aiChatInput.value = '';
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      }
+    });
+
+    // Handle Alert Button click
+    document.getElementById('alertButton').addEventListener('click', () => {
+      // Here you would integrate with your backend to send an SMS alert.
+      alert("Alert sent to first responders!");
+    });
+  </script>
+</body>
+</html>
