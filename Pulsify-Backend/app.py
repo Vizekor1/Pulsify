@@ -10,7 +10,7 @@ def index():
 # In-memory user store
 users = []
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['GET', 'POST']) # chihib 
 def signup():
     if request.method == 'POST':
         username = request.form.get('username')
