@@ -74,7 +74,6 @@ header h1 {
 }
 
 /* Custom Utility Classes */
-/* Mimic Tailwind's min-height and min-width utilities */
 .min-h-24em {
   min-height: 24em;
 }
@@ -95,17 +94,14 @@ header h1 {
   min-height: 5em;
 }
 
-/* Mimic Tailwind's rounded-[1.5em] */
 .rounded-custom {
   border-radius: 1.5em;
 }
 
-/* Mimic Tailwind's gap utility (for flex containers) */
 .gap-0_5rem {
   gap: 0.5rem;
 }
 
-/* Mimic Tailwind's padding of 0.5rem */
 .p-0_5rem {
   padding: 0.5rem;
 }
@@ -127,4 +123,53 @@ header h1 {
 /* Custom Font Class for Montserrat */
 .font-monts {
   font-family: 'Montserrat', sans-serif;
+}
+
+/* Sidebar and Header Colors */
+.bg-purple {
+  background-color: #2C003E; /* Dark purple for sidebar */
+  color: white;
+}
+
+.ourple {
+  background-color: #3B0A70; /* A variant purple for patient header/vitals */
+  color: white;
+}
+
+/* AI Chat Styles (if used) */
+.ai-chat {
+  background-color: #3B0B5B; /* Slightly lighter purple */
+  color: #fff;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.75rem;
+}
+.ai-chat-messages {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+}
+.ai-chat-input {
+  margin-top: 1rem;
+}
+.ai-chat-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+.ai-chat-buttons button {
+  border: none;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  color: #2C003E;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+.ai-chat-buttons button:hover {
+  background-color: #f1f1f1;
 }
